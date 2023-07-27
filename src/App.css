@@ -40,3 +40,33 @@
 .read-the-docs {
   color: #888;
 }
+
+.header{
+  display: grid;
+  grid-template-columns: 1fr 200px;
+}
+
+.title h1{
+  margin-bottom: 12px;
+}
+
+.title p{
+  margin-bottom: 52px;
+}
+
+.scoreboard{
+  place-self: center;
+  font-weight: bold;
+}
+
+.cardTable{
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.card{
+  font-size: 24px;
+  border: 1px solid black;
+  border-radius: 18px;
+}
