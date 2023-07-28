@@ -1,39 +1,44 @@
 import { useState, useEffect } from "react"
 import Card from './Card.jsx'
-
-const imgUrlArray = [
-    "https://maplestory.io/api/GMS/242/mob/100004/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2600309/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2600307/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2100100/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2100105/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2220100/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2600314/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2230101/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2600013/render/stand",
-    "https://maplestory.io/api/GMS/242/mob/2600609/render/stand",
-]
+import { data, returnUrl} from './CardData.jsx'
 
 function CardTable() {
-    // const [img, setImg] = useState();
-    // async function fetchImage(imgUrl){
-    //     const res = await fetch(imgUrl);
-    //     const imageBlob = await res.blob();
-    //     const imageObjURL = URL.createObjectURL(imageBlob);
-    //     setImg(imageObjURL);
-    // }
-    // useEffect(() => {
-    //     fetchImage(imgUrlArray[0]);
-    // }, []);
+    const [img1, setImg1] = useState();
+    
+
+    async function fetchImage(url){
+        const res = await fetch(url);
+        return res;
+        const blob = await res.blob();
+        const imageURL = URL.createObjectURL(blob);
+        return imageURL;
+    }
+
+    useEffect(() => {
+        let mobArray = [];
+        const fetchData = async () => {
+            data.map((mob) => {
+                const mobName = mob.name;
+                const imageURL = fetchImage(returnUrl(mob.id));
+                mobArray.push([mobName, imageURL]);
+            })
+        }
+        fetchData();
+        setImageArray(mobArray);
+    }, []);
+
+    useEffect(() => {
+        console.log(imageArray);
+    })
+
 
     function clickHandler(){
         console.log('hey');
     }
-
     return(
         <div className="cardTable">
-            {imgUrlArray.map((imgUrl) => {
-                return <Card img={imgUrl} onClick={clickHandler}></Card>
+            {data.map((mob) => {
+                return <Card img={returnUrl(mob.id)} onClick={clickHandler}></Card>
             })}
         </div>
     )

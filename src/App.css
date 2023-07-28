@@ -62,11 +62,12 @@
 .cardTable{
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .card{
   font-size: 24px;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 18px;
+  background-color: #e2e8f0;
 }
